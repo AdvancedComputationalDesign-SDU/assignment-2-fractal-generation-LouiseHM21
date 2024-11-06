@@ -43,11 +43,11 @@ def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=2)
     end_point = draw_tree_branch(ax, start_point, length, angle, color)
 
     # recursive branching
-    length_multiplier = 0.8 
-    new_length = length * length_multiplier     # shorting each new branch depth with the length_multiplier
-
     for i in range(branches):
-        random_angle_offset = random.uniform(0,45)
+        length_multiplier = random.uniform(0.6,0.9)         # making the length_multiplier random
+        new_length = length * length_multiplier
+        
+        random_angle_offset = random.uniform(0,90)
         angle_offset = math.radians(random_angle_offset)    # making the angles of the branches random
 
         new_angle = angle - (branches - 1) * angle_offset / 2 + i * angle_offset    # calculating the new angle for each new branch
