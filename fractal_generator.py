@@ -53,7 +53,7 @@ ax.axis("off")
 
 # initial parameters
 start_point = (0,0)
-initial_length = 10
+initial_length = 1
 initial_angle = math.radians(90)
 depth = 4
 
