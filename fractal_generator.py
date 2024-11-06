@@ -9,6 +9,7 @@ This script generates fractal patterns using recursive functions and geometric t
 
 # Importing libraries and stuff
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 import math
 
 # Base case: when the depth of the recursive function is zero, it will stop running
@@ -16,7 +17,7 @@ def base_case (depth):
     return depth <= 0
 
 # drawing branch
-def draw_tree_branch(ax, start_point, length, angle):
+def draw_tree_branch(ax, start_point, length, angle, color):
     # finding the end point of a branch
     end_point = (
             start_point[0] + length * math.cos(angle),   # the square brackets extract the 0th object of the start point aka the x-coordinate.
@@ -24,18 +25,21 @@ def draw_tree_branch(ax, start_point, length, angle):
     )
 
     # drawing the branch
-    ax.plot([start_point[0], end_point[0]], [start_point[1], end_point[1]])
+    ax.plot([start_point[0], end_point[0]], [start_point[1], end_point[1]], color = color)
 
     return end_point # returing end_point so that the new starting point is the previous end point
 
 # Recursive case
-def recursive_case(ax, start_point, length, angle, depth, branches=3):
+def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3):
     # if base_case if true then stopping
     if base_case(depth):
         return
     
+    # color gradient according to the depth
+    color = cm.viridis(depth / max_depth)       # the depth is normalized according to the max_depth
+
     # drawing the first branch
-    end_point = draw_tree_branch(ax, start_point, length, angle)
+    end_point = draw_tree_branch(ax, start_point, length, angle, color)
 
     # recursive branching
     length_multiplier = 0.5 
@@ -45,7 +49,7 @@ def recursive_case(ax, start_point, length, angle, depth, branches=3):
 
     for i in range(branches):
         new_angle = angle - (branches - 1) * angle_offset / 2 + i * angle_offset    # calculating the new angle for each new branch
-        recursive_case(ax, end_point, new_length, new_angle, depth - 1) 
+        recursive_case(ax, end_point, new_length, new_angle, depth - 1, max_depth) 
 
 # plotting the fractal tree
 fig, ax = plt.subplots()
@@ -55,9 +59,9 @@ ax.axis("off")
 start_point = (0,0)
 initial_length = 1
 initial_angle = math.radians(90)
-depth = 4
+max_depth = 4
 
 # call the recursive function
-recursive_case(ax, start_point = start_point, length = initial_length, angle = initial_angle, depth = depth)
+recursive_case(ax, start_point = start_point, length = initial_length, angle = initial_angle, depth = max_depth, max_depth = max_depth)
 
 plt.show()
