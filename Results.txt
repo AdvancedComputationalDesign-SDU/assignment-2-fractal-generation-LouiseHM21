@@ -1,4 +1,5 @@
-"""
+**Results**
+
 Fractal Image 1 (2D_FractalTree1.png)
     Parameters:
 angle_offset: 30°
@@ -102,4 +103,3 @@ depth: 7
 line_width: 10
     Observation:
 - The fractal tree in much fuller/wider but looking less natural with the increase to 4 branches
-  """
