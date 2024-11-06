@@ -9,8 +9,9 @@ This script generates fractal patterns using recursive functions and geometric t
 
 # Importing libraries and stuff
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
+import matplotlib.cm as cm          # for colormapping
 import math
+import random
 
 # Base case: when the depth of the recursive function is zero, it will stop running
 def base_case (depth):
@@ -30,7 +31,7 @@ def draw_tree_branch(ax, start_point, length, angle, color):
     return end_point # returing end_point so that the new starting point is the previous end point
 
 # Recursive case
-def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3):
+def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=2):
     # if base_case if true then stopping
     if base_case(depth):
         return
@@ -42,12 +43,13 @@ def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3)
     end_point = draw_tree_branch(ax, start_point, length, angle, color)
 
     # recursive branching
-    length_multiplier = 0.5 
+    length_multiplier = 0.8 
     new_length = length * length_multiplier     # shorting each new branch depth with the length_multiplier
-    
-    angle_offset = math.radians(20)             # the angle new branch will have to the previous branch
 
     for i in range(branches):
+        random_angle_offset = random.uniform(0,45)
+        angle_offset = math.radians(random_angle_offset)    # making the angles of the branches random
+
         new_angle = angle - (branches - 1) * angle_offset / 2 + i * angle_offset    # calculating the new angle for each new branch
         recursive_case(ax, end_point, new_length, new_angle, depth - 1, max_depth) 
 
@@ -59,7 +61,7 @@ ax.axis("off")
 start_point = (0,0)
 initial_length = 1
 initial_angle = math.radians(90)
-max_depth = 4
+max_depth = 6
 
 # call the recursive function
 recursive_case(ax, start_point = start_point, length = initial_length, angle = initial_angle, depth = max_depth, max_depth = max_depth)
