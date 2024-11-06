@@ -18,7 +18,7 @@ def base_case (depth):
     return depth <= 0
 
 # drawing branch
-def draw_tree_branch(ax, start_point, length, angle, color):
+def draw_tree_branch(ax, start_point, length, angle, color, line_width):
     # finding the end point of a branch
     end_point = (
             start_point[0] + length * math.cos(angle),   # the square brackets extract the 0th object of the start point aka the x-coordinate.
@@ -26,7 +26,7 @@ def draw_tree_branch(ax, start_point, length, angle, color):
     )
 
     # drawing the branch
-    ax.plot([start_point[0], end_point[0]], [start_point[1], end_point[1]], color = color)
+    ax.plot([start_point[0], end_point[0]], [start_point[1], end_point[1]], color = color, lw = line_width)
 
     return end_point # returing end_point so that the new starting point is the previous end point
 
@@ -36,11 +36,14 @@ def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=2)
     if base_case(depth):
         return
     
+    # making the lines width vary with the depth
+    line_width = max(1, 10 * depth / max_depth)
+
     # color gradient according to the depth
     color = cm.viridis(depth / max_depth)       # the depth is normalized according to the max_depth
 
     # drawing the first branch
-    end_point = draw_tree_branch(ax, start_point, length, angle, color)
+    end_point = draw_tree_branch(ax, start_point, length, angle, color, line_width)
 
     # recursive branching
     for i in range(branches):
