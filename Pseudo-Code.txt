@@ -1,18 +1,57 @@
 **Pseudo-Code**
 
-# Importing libraries and stuff
-import matplotlib.pyplot as plt
-import math
+1. Base case function: base_case(depth)
+    if depth <= 0, return
 
-Define Base case function
-    return if depth is less than or equal to 0
+2. Draw tree branch function: draw_tree_branch(ax, start_point, length, angle)
+    inputs:
+        ax: plotting axis
+        start_point: starting coordinates
+        length: length of first branch
+        angle: angle in radians between the one branch and the next
+    process:
+        calculate end_point of branch
+            start_point[0] + length * math.cos(angle)
+            start_point[1] + length * math.sin(angle)
+        draw line from start_point to end_point on ax
+        return end_point
 
-Define drawing branch function
+3. Recursive case function (main function): recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3)
+    inputs:
+        ax: plotting axis
+        start_point: starting coordinates
+        length: length of first branch
+        angle: angle in radians between the one branch and the next
+        depth: current recursion depth
+        max_depth: maximum recurtion depth
+        branches: number of new branches draw from one branch
+    process:
+        if base_case(depth), return
+        calculate line width according to recursion depth
+            line_width = max(1, 8 * depth / max_depth)
+        colormapping according to recursion depth
+            color = cm.viridis(depth / max_depth)
+        loop for each branch
+            calculate new length as a function of length
+                new_length = length * random.uniform(0.6,0.9)
+            calculate new angle by offsetting angle
+                new_angle = angle - (branches - 1) * angle_offset / 2 + i * angle_offset
+            recursive call with the newly caculated length and angle and depth - 1
+                recursive_case(ax, end_point, new_length, new_angle, depth - 1, max_depth)
 
-Define recursive case function
+4. Set up plot
+    create plot
+        fig, ax = plt.subplots()
+    hide axis
 
-plotting the fractal tree
+5. Starting parameters
+    start_point = (0, 0)
+    initial_length = 1
+    initial_angle = 90° in radians
+    max_depth = 3
 
-call recursive case function
+6. Call main function
+    recursive_case(ax, start_point = start_point, length = initial_length, angle = initial_angle, depth = max_depth, max_depth = max_depth)
 
-show recursive case function
+7. Display plot
+    plt.show()

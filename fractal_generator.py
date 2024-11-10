@@ -14,7 +14,7 @@ import math
 import random
 
 # Base case: when the depth of the recursive function is zero, it will stop running
-def base_case (depth):
+def base_case(depth):
     return depth <= 0
 
 # drawing branch
@@ -37,7 +37,7 @@ def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3)
         return
     
     # making the lines width vary with the depth
-    line_width = max(1, 8 * depth / max_depth)
+    line_width = max(1.8 * depth / max_depth)
 
     # color gradient according to the depth
     color = cm.viridis(depth / max_depth)       # the depth is normalized according to the max_depth
