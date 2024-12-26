@@ -1,12 +1,3 @@
-"""
-Assignment 2: Fractal Generator
-
-Author: Louise Hedegård Madsen
-
-Description:
-This script generates fractal patterns using recursive functions and geometric transformations.
-"""
-
 # Importing libraries and stuff
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm          # for colormapping
