@@ -116,21 +116,142 @@ This recursive approach mirrors the principles of fractals, where each part rese
 
 ## Results
 
-*(Include images of your generated fractal patterns, and discuss any observations or interesting findings.)*
+### **Fractal Variation 1**  
+**Parameters**:  
+- `angle_offset`: 30°  
+- `length_multiplier`: 0.5  
+- `branches`: 3  
+- `depth`: 4  
 
-Example:
+**Observations**:  
+- Showcasing the initial 2D fractal tree.  
+- Symmetry in the tree structure is evident.  
+- Lacks natural appearance and fullness.  
+- Appears very geometric and artificial.
 
-### Fractal Pattern 1: Basic Fractal Tree
+![Fractal Image 1](images/2D_FractalTree1.png)
 
-![Fractal Tree](images/example.png)
+### **Fractal Variation 2**  
+**Parameters**:  
+- `angle_offset`: 30°  
+- `length_multiplier`: 0.5  
+- `branches`: 3  
+- `depth`: 4  
 
-- **Parameters**:
-  - `angle_change`: 30°
-  - `length_scaling_factor`: 0.7
-  - `recursion_depth`: 5
-- **Observations**:
-  - The fractal tree exhibits symmetry and balance.
-  - As the recursion depth increases, the level of detail in the branches increases.
+**Observations**:  
+- Same fractal structure as Image 1, but a color gradient is added based on recursion depth.  
+- Color adds visual interest but doesn’t affect the overall structure or natural appearance.
+
+![Fractal Image 2](images/2D_FractalTree2.png)
+
+### **Fractal Variation 3**  
+**Parameters**:  
+- `angle_offset`: 45°  
+- `length_multiplier`: 0.8  
+- `branches`: 2  
+- `depth`: 6  
+
+**Observations**:  
+- Wider and fuller fractal tree due to the increased angle.  
+- Appears more natural than previous iterations.  
+- Symmetry still makes the tree look artificial.
+
+![Fractal Image 3](images/2D_FractalTree3.png)
+
+### **Fractal Variation 4**  
+**Parameters**:  
+- `angle_offset`: Random within [-50, 50]  
+- `length_multiplier`: 0.8  
+- `branches`: 2  
+- `depth`: 6  
+
+**Observations**:  
+- Randomized angles remove the strict symmetry of the tree.  
+- Tree still appears unnatural and lacks fullness.
+
+![Fractal Image 4](images/2D_FractalTree4.png)
+
+### **Fractal Variation 5**  
+**Parameters**:  
+- `angle_offset`: Random within [0, 30]  
+- `length_multiplier`: 0.8  
+- `branches`: 2  
+- `depth`: 6  
+
+**Observations**:  
+- Adjusted angle randomness improves the natural look.  
+- Fractal tree still lacks fullness in its structure.
+
+![Fractal Image 5](images/2D_FractalTree5.png)
+
+### **Fractal Variation 6**  
+**Parameters**:  
+- `angle_offset`: Random within [0, 45]  
+- `length_multiplier`: Random within [0.6, 0.8]  
+- `branches`: 2  
+- `depth`: 6  
+
+**Observations**:  
+- Randomization in both angle and length increases the natural appearance.  
+- Still looks sparse and could use more fullness.
+
+![Fractal Image 6](images/2D_FractalTree6.png)
+
+### **Fractal Variation 7**  
+**Parameters**:  
+- `angle_offset`: Random within [0, 60]  
+- `length_multiplier`: Random within [0.5, 0.8]  
+- `branches`: 2  
+- `depth`: 6  
+- `line_width`: 10  
+
+**Observations**:  
+- Varying branch thickness based on depth adds realism.  
+- Wider angle range makes the tree appear unnaturally wide.
+
+![Fractal Image 7](images/2D_FractalTree7.png)
+
+### **Fractal Variation 8**  
+**Parameters**:  
+- `angle_offset`: Random within [0, 30]  
+- `length_multiplier`: Random within [0.7, 0.8]  
+- `branches`: 2  
+- `depth`: 10  
+- `line_width`: 8  
+
+**Observations**:  
+- Increased recursion depth enhances the natural appearance.  
+- The tree appears tall and narrow relative to its width.
+
+![Fractal Image 8](images/2D_FractalTree8.png)
+
+### **Fractal Variation 9**  
+**Parameters**:  
+- `angle_offset`: Random within [0, 30]  
+- `length_multiplier`: Random within [0.8, 0.9]  
+- `branches`: 3  
+- `depth`: 8  
+- `line_width`: 8  
+
+**Observations**:  
+- Increased branches create a fuller, wider tree.  
+- Looks more natural than previous iterations.
+
+![Fractal Image 9](images/2D_FractalTree9.png)
+
+### **Fractal Variation 10**  
+**Parameters**:  
+- `angle_offset`: Random within [0, 30]  
+- `length_multiplier`: Random within [0.6, 0.9]  
+- `branches`: 4  
+- `depth`: 7  
+- `line_width`: 10  
+
+**Observations**:  
+- Increased number of branches results in a much fuller, wider tree.  
+- However, the added branches make the tree look less natural and overly dense.  
+
+![Fractal Image 10](images/2D_FractalTree10.png)
 
 ---
 
