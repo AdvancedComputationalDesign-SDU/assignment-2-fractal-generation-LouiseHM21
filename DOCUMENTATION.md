@@ -257,15 +257,25 @@ This recursive approach mirrors the principles of fractals, where each part rese
 
 ## Challenges and Solutions
 
-*(Discuss any challenges you faced during the assignment and how you overcame them.)*
+### **Challenge 1: Symmetry in Fractal Tree**
+- **Problem**: Early versions of the fractal tree appeared overly symmetrical, making the structure look unnatural and artificial.  
+- **Solution**: Introduced randomness in both branch angles and lengths. By using `random.uniform()` to create variability within specified ranges, the fractal tree achieved a more organic and less predictable appearance.
 
-Example:
+### **Challenge 2: Sparse and Bare Tree Structure**
+- **Problem**: The fractal tree often looked sparse and lacked fullness, especially at lower recursion depths.  
+- **Solution**: Increased the recursion depth and allowed more branches (`branches`) to spawn at each iteration. Additionally, adjusting `angle_offset` and `length_multiplier` helped create fuller and more interconnected branches.
 
-- **Challenge**: Managing the growing number of line segments and ensuring they are correctly plotted.
-  - **Solution**: Stored all line segments in a list and plotted them after the recursion completed.
+### **Challenge 3: Handling Visual Complexity**
+- **Problem**: At higher recursion depths, the large number of branches made it difficult to maintain clarity in visualization.  
+- **Solution**: Adjusted line widths based on depth using `line_width = max(1, 8 * depth / max_depth)`. Thicker lines near the base and thinner lines at higher levels improved visual balance.
 
-- **Challenge**: Implementing randomness without losing the overall structure.
-  - **Solution**: Introduced randomness within controlled bounds for angles and lengths.
+### **Challenge 4: Visualizing Depth**
+- **Problem**: Without visual cues, it was difficult to distinguish between different levels of recursion.  
+- **Solution**: Applied a colormap (`cm.viridis`) to assign colors based on depth. This provided a gradient effect, making it easier to identify deeper branches.
+
+### **Challenge 5: Maintaining Code Flexibility**
+- **Problem**: Hardcoded parameters made experimenting with different tree styles and structures tedious.  
+- **Solution**: Encapsulated key parameters like `branches`, `angle_offset`, `length_multiplier`, and `depth` into function inputs. This modular approach made it easy to adjust values and experiment dynamically. 
 
 ---
 
