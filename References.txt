@@ -1,6 +1,0 @@
-**References**
-
-- Matplotlib Pyplot: [https://matplotlib.org/stable/api/pyplot_summary.html]
-- Matplotlib ColoMap: [https://matplotlib.org/stable/api/cm_api.html]
-- Pseudo-random numbers: [https://docs.python.org/3/library/random.html#random.uniform]
-- Mathematical functions: [https://docs.python.org/3/library/math.html]

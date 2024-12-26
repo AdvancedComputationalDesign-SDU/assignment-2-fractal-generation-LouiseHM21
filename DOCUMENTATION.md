@@ -271,11 +271,14 @@ Example:
 
 ## References
 
-*(List any resources you used or found helpful during the assignment.)*
+- **Matplotlib Pyplot**: [https://matplotlib.org/stable/api/pyplot_summary.html]  
+  *(Used for plotting and visualizing the fractal tree.)*
 
-- **Shapely Manual**: [https://shapely.readthedocs.io/en/stable/manual.html](https://shapely.readthedocs.io/en/stable/manual.html)
-- **Matplotlib Pyplot Tutorial**: [https://matplotlib.org/stable/tutorials/introductory/pyplot.html](https://matplotlib.org/stable/tutorials/introductory/pyplot.html)
+- **Matplotlib Colormap**: [https://matplotlib.org/stable/api/cm_api.html]  
+  *(Used for applying color gradients based on recursion depth.)*
 
----
+- **Pseudo-random Numbers**: [https://docs.python.org/3/library/random.html#random.uniform]  
+  *(Used for introducing randomness in branch angles and lengths to enhance natural appearance.)*
 
-*(Feel free to expand upon these sections to fully capture your work and learning process.)*
+- **Mathematical Functions**: [https://docs.python.org/3/library/math.html]  
+  *(Used for trigonometric calculations of branch endpoints and angle adjustments.)*
