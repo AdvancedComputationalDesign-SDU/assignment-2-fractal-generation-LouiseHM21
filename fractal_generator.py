@@ -7,24 +7,25 @@ from shapely.affinity import rotate, scale, translate
 
 # Base case: when the depth of the recursive function is zero, it will stop running
 def base_case(depth):
-    return depth <= 0
+    return depth <= 0  # Terminates recursion when the depth reaches zero
 
 # Drawing branch using Shapely
 def draw_tree_branch(ax, start_point, length, angle, color, line_width):
-    # Create the initial branch as a line segment
+    # Create the initial branch as a horizontal line segment
     branch = LineString([
         start_point,
-        (start_point[0] + length, start_point[1])  # Horizontal line initially
+        (start_point[0] + length, start_point[1])  # Define end point horizontally from start point
     ])
 
-    # Rotate the branch to match the desired angle
+    # Rotate the branch around the start point to match the desired angle
     branch = rotate(branch, angle, origin=start_point, use_radians=True)
 
-    # Plot the branch
+    # Extract the coordinates and plot the branch on the axis
     x, y = branch.xy
     ax.plot(x, y, color=color, lw=line_width)
 
-    return branch.coords[-1]  # Return the endpoint of the branch
+    # Return the end point of the branch for further recursive branching
+    return branch.coords[-1]
 
 # Recursive case
 def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3):
@@ -32,20 +33,22 @@ def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3)
     if base_case(depth):
         return
 
-    # Calculate line width based on depth
+    # Calculate line width based on current depth for visual effect
     line_width = max(1, 8 * depth / max_depth)
 
-    # Assign color gradient based on depth
+    # Assign a color based on the recursion depth using a gradient colormap
     color = cm.viridis(depth / max_depth)
 
-    # Draw the main branch and get its endpoint
+    # Draw the main branch and get its endpoint for further branching
     end_point = draw_tree_branch(ax, start_point, length, angle, color, line_width)
 
-    # Recursive branching
+    # Generate child branches recursively
     for i in range(branches):
-        # Randomize length and angle for natural variation
+        # Randomize the length of the new branch for natural variation
         new_length = length * random.uniform(0.6, 1.0)
-        angle_offset = random.uniform(0, 45)  # Random angle offset in degrees
+
+        # Randomize the angle offset to create different branching patterns
+        angle_offset = random.uniform(0, 45)  # Offset in degrees
         new_angle = angle - (branches - 1) * angle_offset / 2 + i * angle_offset
 
         # Recursive call with updated parameters
@@ -53,15 +56,15 @@ def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3)
 
 # Plotting the fractal tree
 fig, ax = plt.subplots()
-ax.axis("off")
+ax.axis("off")  # Hide axes for a cleaner visualization
 
-# Input parameters
-start_point = (0, 0)  # Starting coordinates
-initial_length = 1  # Initial branch length
-initial_angle = 90  # Initial angle in degrees
+# Input parameters for the fractal tree
+start_point = (0, 0)  # Starting coordinates for the tree trunk
+initial_length = 1  # Length of the initial branch
+initial_angle = 90  # Starting angle in degrees (90 for vertical trunk)
 max_depth = 4  # Maximum recursion depth
 
-# Call the recursive function
+# Call the recursive function to generate the fractal tree
 recursive_case(
     ax,
     start_point=start_point,
@@ -71,4 +74,4 @@ recursive_case(
     max_depth=max_depth
 )
 
-plt.show()
+plt.show()  # Display the generated fractal tree
