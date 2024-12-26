@@ -88,12 +88,6 @@
 
 ---
 
-### Highlights of Refinements
-- Explicitly defined inputs, outputs, and processes for each function.
-- Clearly structured steps for recursive calculations and plotting.
-- Detailed explanations for each branch's recursive properties (length, angle, color, line width).
----
-
 ## Technical Explanation
 
 *(Provide a concise explanation of your code, focusing on recursion and geometric manipulations. Discuss how your approach generates the final fractal pattern and the mathematical principles involved.)*
