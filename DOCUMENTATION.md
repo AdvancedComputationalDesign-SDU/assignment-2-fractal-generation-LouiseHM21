@@ -26,22 +26,21 @@
      - `ax`: Plotting axis for drawing.
      - `start_point`: Tuple (x, y) representing the branch's starting point.
      - `length`: Length of the branch.
-     - `angle`: Angle in radians.
+     - `angle`: Angle in degrees.
      - `color`: Branch color (gradient mapped to recursion depth).
      - `line_width`: Width of the branch line.
    - **Process**:
-     - Calculate `end_point`:
-       - `end_x = start_x + length * cos(angle)`
-       - `end_y = start_y + length * sin(angle)`
-     - Draw line from `start_point` to `end_point` on the plotting axis `ax`.
-     - Return `end_point` as the new starting point for subsequent branches.
+     - Create a `LineString` from `start_point` to `(start_point[0] + length, start_point[1])`.
+     - Rotate the line by `angle` around `start_point`.
+     - Draw the line using `ax.plot()`.
+     - Return the `end_point` of the branch for subsequent recursion.
 
 3. **Recursive Case Function: `recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3)`**
    - **Inputs**:
      - `ax`: Plotting axis for drawing.
      - `start_point`: Tuple (x, y) representing the branch's starting point.
      - `length`: Length of the current branch.
-     - `angle`: Angle in radians of the current branch.
+     - `angle`: Angle in degrees of the current branch.
      - `depth`: Current recursion depth.
      - `max_depth`: Maximum allowed recursion depth.
      - `branches`: Number of branches splitting from each node.
@@ -57,7 +56,7 @@
      - **For** each branch (from 0 to `branches - 1`):
        - Calculate new branch properties:
          - `new_length = length * random.uniform(0.6, 1.0)`
-         - `angle_offset = radians(random.uniform(0, 45))`
+         - `angle_offset = random.uniform(0, 45)`
          - `new_angle = angle - (branches - 1) * angle_offset / 2 + i * angle_offset`
        - Recursive call with updated parameters:
          - `recursive_case(ax, end_point, new_length, new_angle, depth - 1, max_depth)`
@@ -73,8 +72,8 @@
      - `start_point = (0, 0)`
    - Set initial branch length:
      - `initial_length = 1`
-   - Set initial angle in radians:
-     - `initial_angle = radians(90)`
+   - Set initial angle in degrees:
+     - `initial_angle = 90`
    - Define the maximum recursion depth:
      - `max_depth = 3`
 
@@ -98,7 +97,8 @@ In this implementation, the `recursive_case` function is the core component for 
 
 2. **Branch Creation**:  
    At each step, the function:
-   - Calculates the `end_point` of the branch using trigonometric functions (`cos` and `sin`), based on the `start_point`, `length`, and `angle`.
+   - Creates a branch as a `LineString` object from the `start_point` using Shapely.
+   - Rotates the branch by the specified `angle` around the `start_point`.
    - Draws the branch using `ax.plot()`, with visual attributes (color and line width) mapped to the current depth. The line width decreases with depth, and the color gradient is computed using the Viridis colormap.
 
 3. **Recursive Splitting**:  
@@ -289,6 +289,9 @@ This recursive approach mirrors the principles of fractals, where each part rese
 
 - **Pseudo-random Numbers**: [https://docs.python.org/3/library/random.html#random.uniform]  
   *(Used for introducing randomness in branch angles and lengths to enhance natural appearance.)*
+
+- **Shapely Library**: [https://shapely.readthedocs.io/en/stable/manual.html]  
+  *(Used for geometric transformations such as rotation and line creation.)*
 
 - **Mathematical Functions**: [https://docs.python.org/3/library/math.html]  
   *(Used for trigonometric calculations of branch endpoints and angle adjustments.)*
