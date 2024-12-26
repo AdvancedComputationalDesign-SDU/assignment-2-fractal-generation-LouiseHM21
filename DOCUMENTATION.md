@@ -90,19 +90,27 @@
 
 ## Technical Explanation
 
-*(Provide a concise explanation of your code, focusing on recursion and geometric manipulations. Discuss how your approach generates the final fractal pattern and the mathematical principles involved.)*
+In this implementation, the `recursive_case` function is the core component for generating fractal patterns through recursive branching. The function emulates the process of tree growth by drawing branches that split and decrease in size at each recursion step.
 
-Example:
+**Key Steps in the Recursive Process:**
+1. **Base Case**:  
+   The recursion stops when the `depth` reaches zero (`base_case(depth)`), ensuring the function terminates.
 
-In my implementation, the `generate_fractal` function recursively draws line segments representing branches of a fractal tree. The function calculates the end point of each line using trigonometric functions based on the current angle and length.
+2. **Branch Creation**:  
+   At each step, the function:
+   - Calculates the `end_point` of the branch using trigonometric functions (`cos` and `sin`), based on the `start_point`, `length`, and `angle`.
+   - Draws the branch using `ax.plot()`, with visual attributes (color and line width) mapped to the current depth. The line width decreases with depth, and the color gradient is computed using the Viridis colormap.
 
-At each recursion step, the function:
+3. **Recursive Splitting**:  
+   Each branch generates a specified number of smaller branches (`branches`). For each new branch:
+   - The `length` is scaled down by a random factor, introducing variation in branch lengths.
+   - The `angle` is adjusted by an offset, calculated using a random spread to simulate natural branching angles.
+   - The function calls itself recursively with the updated parameters (`new_length`, `new_angle`, `depth - 1`).
 
-- Decreases the `length` by multiplying it with `length_scaling_factor`.
-- Adjusts the `angle` by adding or subtracting `angle_change` to create branching.
-- Calls itself recursively for each branch until the `recursion_depth` reaches zero.
+4. **Visualization**:  
+   The recursive calls progressively add branches to the plot, creating a self-similar fractal pattern. The visual effect is enhanced by the colormap and varying line widths, providing a sense of depth and complexity.
 
-This approach creates a self-similar pattern characteristic of fractals, where each branch splits into smaller branches in a consistent manner.
+This recursive approach mirrors the principles of fractals, where each part resembles the whole. By combining randomness in angles and lengths with controlled recursion, the algorithm generates visually appealing and natural-looking fractal trees. This flexibility allows customization of parameters such as branch count, maximum depth, and randomness to explore a variety of fractal patterns.
 
 ---
 
@@ -123,8 +131,6 @@ Example:
 - **Observations**:
   - The fractal tree exhibits symmetry and balance.
   - As the recursion depth increases, the level of detail in the branches increases.
-
-*(Repeat for other fractal patterns.)*
 
 ---
 
