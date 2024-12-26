@@ -12,45 +12,86 @@
 
 ## Pseudo-Code
 
-*(Provide detailed pseudo-code explaining the logic of your program. This should clearly outline your recursive functions, parameter definitions, and how they contribute to the final fractal pattern.)*
-
-Example:
-
-1. **Define Main Function `generate_fractal(start_point, angle, length, depth)`**
+1. **Base Case Function: `base_case(depth)`**
    - **Inputs**:
-     - `start_point`: Tuple of coordinates (x, y).
-     - `angle`: Current angle in degrees.
-     - `length`: Length of the current line segment.
      - `depth`: Current recursion depth.
    - **Process**:
-     - **If** `depth` is 0:
-       - **Return** (End recursion).
-     - **Else**:
-       - Calculate `end_point` using trigonometry:
-         - `end_x = start_x + length * cos(radians(angle))`
-         - `end_y = start_y + length * sin(radians(angle))`
-       - Create a line from `start_point` to `end_point` using Shapely.
-       - **For** each branch (e.g., left and right):
-         - **Calculate** new angle:
-           - Left branch: `new_angle = angle + angle_change`
-           - Right branch: `new_angle = angle - angle_change`
-         - **Calculate** new length:
-           - `new_length = length * length_scaling_factor`
-         - **Recursive Call**:
-           - `generate_fractal(end_point, new_angle, new_length, depth - 1)`
-     - **Return** (After recursive calls).
+     - **If** `depth` ≤ 0:
+       - Return `True` (end recursion).
+     - Else:
+       - Return `False` (continue recursion).
 
-2. **Initialize Parameters**
-   - Set `start_point`, `initial_angle`, `initial_length`, `recursion_depth`, `angle_change`, `length_scaling_factor`.
+2. **Draw Tree Branch Function: `draw_tree_branch(ax, start_point, length, angle, color, line_width)`**
+   - **Inputs**:
+     - `ax`: Plotting axis for drawing.
+     - `start_point`: Tuple (x, y) representing the branch's starting point.
+     - `length`: Length of the branch.
+     - `angle`: Angle in radians.
+     - `color`: Branch color (gradient mapped to recursion depth).
+     - `line_width`: Width of the branch line.
+   - **Process**:
+     - Calculate `end_point`:
+       - `end_x = start_x + length * cos(angle)`
+       - `end_y = start_y + length * sin(angle)`
+     - Draw line from `start_point` to `end_point` on the plotting axis `ax`.
+     - Return `end_point` as the new starting point for subsequent branches.
 
-3. **Call `generate_fractal` Function**
-   - Begin the fractal generation by calling `generate_fractal(start_point, initial_angle, initial_length, recursion_depth)`.
+3. **Recursive Case Function: `recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3)`**
+   - **Inputs**:
+     - `ax`: Plotting axis for drawing.
+     - `start_point`: Tuple (x, y) representing the branch's starting point.
+     - `length`: Length of the current branch.
+     - `angle`: Angle in radians of the current branch.
+     - `depth`: Current recursion depth.
+     - `max_depth`: Maximum allowed recursion depth.
+     - `branches`: Number of branches splitting from each node.
+   - **Process**:
+     - **If** `base_case(depth)` is `True`:
+       - Return (end recursion).
+     - Calculate `line_width` based on depth:
+       - `line_width = max(1, 8 * depth / max_depth)`
+     - Map `depth` to a color gradient using colormap:
+       - `color = cm.viridis(depth / max_depth)`
+     - Draw the main branch:
+       - Call `draw_tree_branch(ax, start_point, length, angle, color, line_width)`.
+     - **For** each branch (from 0 to `branches - 1`):
+       - Calculate new branch properties:
+         - `new_length = length * random.uniform(0.6, 1.0)`
+         - `angle_offset = radians(random.uniform(0, 45))`
+         - `new_angle = angle - (branches - 1) * angle_offset / 2 + i * angle_offset`
+       - Recursive call with updated parameters:
+         - `recursive_case(ax, end_point, new_length, new_angle, depth - 1, max_depth)`
 
-4. **Visualization**
-   - Collect all the lines generated.
-   - Use Matplotlib to plot the lines.
-   - Apply any visualization enhancements (colors, line widths).
+4. **Set Up Plot**
+   - Create a plotting figure:
+     - `fig, ax = plt.subplots()`
+   - Hide the axes:
+     - `ax.axis('off')`
 
+5. **Define Starting Parameters**
+   - Set the starting point:
+     - `start_point = (0, 0)`
+   - Set initial branch length:
+     - `initial_length = 1`
+   - Set initial angle in radians:
+     - `initial_angle = radians(90)`
+   - Define the maximum recursion depth:
+     - `max_depth = 3`
+
+6. **Call Recursive Function**
+   - Call the `recursive_case` function:
+     - `recursive_case(ax, start_point, initial_length, initial_angle, max_depth, max_depth)`
+
+7. **Display the Plot**
+   - Render the fractal tree:
+     - `plt.show()`
+
+---
+
+### Highlights of Refinements
+- Explicitly defined inputs, outputs, and processes for each function.
+- Clearly structured steps for recursive calculations and plotting.
+- Detailed explanations for each branch's recursive properties (length, angle, color, line width).
 ---
 
 ## Technical Explanation

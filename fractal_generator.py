@@ -37,7 +37,7 @@ def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3)
         return
     
     # making the lines width vary with the depth
-    line_width = max(1.8 * depth / max_depth)
+    line_width = max(1, 8 * depth / max_depth)
 
     # color gradient according to the depth
     color = cm.viridis(depth / max_depth)       # the depth is normalized according to the max_depth
@@ -47,13 +47,11 @@ def recursive_case(ax, start_point, length, angle, depth, max_depth, branches=3)
 
     # recursive branching
     for i in range(branches):
-        length_multiplier = random.uniform(0.6,1.0)         # making the length_multiplier random
-        new_length = length * length_multiplier
-        
-        random_angle_offset = random.uniform(0,45)
-        angle_offset = math.radians(random_angle_offset)    # making the angles of the branches random
+        new_length = length * random.uniform(0.6,1.0)        # making the length_multiplier random
 
+        angle_offset = math.radians(random.uniform(0,45))    # making the angles of the branches random
         new_angle = angle - (branches - 1) * angle_offset / 2 + i * angle_offset    # calculating the new angle for each new branch
+        
         recursive_case(ax, end_point, new_length, new_angle, depth - 1, max_depth) 
 
 # plotting the fractal tree
